@@ -1,0 +1,14 @@
+com\mycompany\trendyoltech\Email.class
+com\mycompany\trendyoltech\Post.class
+com\mycompany\trendyoltech\Sender.class
+com\mycompany\trendyoltech\SMS.class
+com\mycompany\trendyoltech\MailDTO.class
+com\mycompany\trendyoltech\QuotaReachedException.class
+com\mycompany\trendyoltech\User.class
+com\mycompany\trendyoltech\SMSDTO.class
+com\mycompany\trendyoltech\Company.class
+com\mycompany\trendyoltech\PostDTO.class
+com\mycompany\trendyoltech\English.class
+com\mycompany\trendyoltech\Turkish.class
+com\mycompany\trendyoltech\main.class
+com\mycompany\trendyoltech\Language.class
