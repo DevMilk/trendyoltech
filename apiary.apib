@@ -1,0 +1,146 @@
+FORMAT: 1A
+HOST: https://polls.apiblueprint.org/
+
+# Concert
+
+Concert is a simple API allowing users to get information about concerts 
+and add new concert informations.   
+
+## Concert Collection [/concerts]
+
+### Get All Concerts [GET]
+
++ Response 200 (application/json)
+
+        [   
+            {
+                "concertName": "Live Concert At Houston",
+                "groupOrSoloName": ["Jon Wolfe"],
+                "publishedAt": "2013-05-25T20:00:00-0800",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2013-08-27", //ISO 8601
+                        "eventDateTime": "2013-08-27T20:00:00-0800", //ISO 8601
+                        "concertLocation" : "Houston",
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 71.99,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "MaximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT1H30M", //ISO 8601
+                    }
+            }
+        ]
+
+### Create a New Concert [POST]
+
++ Request (application/json)
+    
+        {
+            "concertName": "Live Rock Concert",
+            "groupOrSoloName": ["The Beatles","Cat Stevens"], //Artist objesi ile değiştirilebilir. 
+            "eventDetails" : 
+                {
+                    "eventDateTime": "2015-08-05T20:00:00-0800", //ISO 8601
+                    "concertLocation" : "Los Angeles, CA",
+                    "participationDetails" : 
+                        {
+                            "limitedParticipation" : false,
+                            "paidParticipation" : true,
+                            "priceDetails" : 
+                                {
+                                    "ticketPrice" : 29.99,
+                                    "currency": "EUR" //ISO 4217
+                                },
+                                
+                            "ticketsRemained" : -1,
+                            "MaximumOccupancy" : 300 
+                         },
+                         
+                    "duration" : "PT1H", //ISO 8601
+                }
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /concerts/7272
+
+    + Body
+
+            {
+                "concertName": "Live Rock Concert",
+                "groupOrSoloName": ["The Beatles","Cat Stevens"],
+                "published_at": "2015-05-05T20:00:00-0800",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2015-08-05", //ISO 8601
+                        "eventDateTime": "2015-08-05T20:00:00-0800", //ISO 8601
+                        "concertLocation" : "Los Angeles, CA",
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : false,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 29.99,
+                                        "currency": "EUR" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : -1,
+                                "MaximumOccupancy" : -1 
+                             },
+                             
+                        "duration" : "PT1H30M", //ISO 8601
+                    }
+            }
+            
+## Concert [/concerts/{concertId}]
+
++ Parameters
+    + concertId (number) - id of the concert in the form of an integer
+
+### Get Details Of Concert [GET]
+
++ Response 200 (application/json)
+
+        
+        {
+            "concertName": "IMAGINE DRAGONZZ AT MADISON SQUARE GARDEN",
+            "groupOrSoloName": ["Imagine Dragonzz"],
+            "published_at": "2015-05-05T20:00:00-0800",
+            "eventDetails" : 
+                {
+                    "eventTime":"20:00:00", //ISO 8601
+                    "eventDate":"2015-08-05", //ISO 8601
+                    "eventDateTime": "2015-08-05T20:00:00-0800", //ISO 8601
+                    "concertLocation" : "MADISON SQUARE GARDEN",
+                    "participationDetails" : 
+                        {
+                            "limitedParticipation" : true,
+                            "paidParticipation" : true,
+                            "priceDetails" : 
+                                {
+                                    "ticketPrice" : 71.99,
+                                    "currency": "USD" //ISO 4217
+                                },
+                                
+                            "ticketsRemained" : 72,
+                            "MaximumOccupancy" : 15000 
+                         },
+                         
+                    "duration" : "PT1H30M", //ISO 8601
+                }
+        }
