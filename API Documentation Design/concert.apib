@@ -6,13 +6,13 @@ HOST: https://polls.apiblueprint.org/
 Concert is a simple API allowing users to get information about concerts 
 and add new concert informations.   
 
-## Concert Collection [/concerts/{?upcoming,name,limit}]
+## Concert Collection [/concerts/{?limit,upcoming,name}]
 + Parameters
     + limit (number,optional) - Limit for number of records to get
     + name (string,optional) - Name of the concert in the form of a string
     + upcoming (boolean, optional) - Parameter to specify is concert is upcoming or finished
 
-### Get All Concerts [GET]
+### Get Concerts With Optional Filtering [GET]
 
 + Response 200 (application/json)
 
