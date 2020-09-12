@@ -6,7 +6,11 @@ HOST: https://polls.apiblueprint.org/
 Concert is a simple API allowing users to get information about concerts 
 and add new concert informations.   
 
-## Concert Collection [/concerts]
+## Concert Collection [/concerts/{?upcoming,name,limit}]
++ Parameters
+    + limit (number,optional) - Limit for number of records to get
+    + name (string,optional) - Name of the concert in the form of a string
+    + upcoming (boolean, optional) - Parameter to specify is concert is upcoming or finished
 
 ### Get All Concerts [GET]
 
@@ -15,14 +19,17 @@ and add new concert informations.
         [   
             {
                 "concertName": "Live Concert At Houston",
+                "uri" : "https://www.JonWolfeOnHouston.com",
                 "groupOrSoloName": ["Jon Wolfe"],
                 "publishedAt": "2013-05-25T20:00:00-0800",
+                "genre": "Blues",
                 "eventDetails" : 
                     {
                         "eventTime":"20:00:00", //ISO 8601
                         "eventDate":"2013-08-27", //ISO 8601
                         "eventDateTime": "2013-08-27T20:00:00-0800", //ISO 8601
-                        "concertLocation" : "Houston",
+                        "city" : "Houston",
+                        "venue": "Houston Concert Hall",
                         "participationDetails" : 
                             {
                                 "limitedParticipation" : true,
@@ -48,11 +55,14 @@ and add new concert informations.
     
         {
             "concertName": "Live Rock Concert",
-            "groupOrSoloName": ["The Beatles","Cat Stevens"], //Artist objesi ile değiştirilebilir. 
+            "uri" : "https://www.LiveRockConcert.com",
+            "groupOrSoloName": ["The Beatles","Cat Stevens"], //Artist objesi ile değiştirilebilir.
+            "genre": "Pop",
             "eventDetails" : 
                 {
                     "eventDateTime": "2015-08-05T20:00:00-0800", //ISO 8601
-                    "concertLocation" : "Los Angeles, CA",
+                    "city" : "Los Angeles, CA",
+                    "venue": "LA Concert Hall",
                     "participationDetails" : 
                         {
                             "limitedParticipation" : false,
@@ -81,14 +91,17 @@ and add new concert informations.
 
             {
                 "concertName": "Live Rock Concert",
+                "uri" : "https://www.LiveRockConcert.com",
                 "groupOrSoloName": ["The Beatles","Cat Stevens"],
                 "published_at": "2015-05-05T20:00:00-0800",
+                "genre": "Pop",
                 "eventDetails" : 
                     {
                         "eventTime":"20:00:00", //ISO 8601
                         "eventDate":"2015-08-05", //ISO 8601
                         "eventDateTime": "2015-08-05T20:00:00-0800", //ISO 8601
-                        "concertLocation" : "Los Angeles, CA",
+                        "city" : "Los Angeles, CA",
+                        "venue": "LA Concert Hall",
                         "participationDetails" : 
                             {
                                 "limitedParticipation" : false,
@@ -119,14 +132,17 @@ and add new concert informations.
         
         {
             "concertName": "IMAGINE DRAGONZZ AT MADISON SQUARE GARDEN",
+            "uri" : "https://www.MadisonImagineDragonzz.com",
             "groupOrSoloName": ["Imagine Dragonzz"],
             "published_at": "2015-05-05T20:00:00-0800",
+            "genre": "Rock",
             "eventDetails" : 
                 {
                     "eventTime":"20:00:00", //ISO 8601
                     "eventDate":"2015-08-05", //ISO 8601
                     "eventDateTime": "2015-08-05T20:00:00-0800", //ISO 8601
-                    "concertLocation" : "MADISON SQUARE GARDEN",
+                    "city": "New York",
+                    "venue" : "MADISON SQUARE GARDEN",
                     "participationDetails" : 
                         {
                             "limitedParticipation" : true,
@@ -144,3 +160,365 @@ and add new concert informations.
                     "duration" : "PT1H30M", //ISO 8601
                 }
         }
+        
+### Delete Concert Record [DELETE]
+
++ Response 204 (application/json)
+        
+
+## Artist [/concerts/artist/{artistname}]
+
++ Parameters
+    + artistname (string) - name of the artist in the form of a string
+    
+### Get the artist's all concerts [GET]
+
++ Response 200 (application/json)
+
+        [   
+            {
+                "concertName": "Live Concert At Houston",
+                "uri" : "https://www.JonWolfeOnHouston.com",
+                "groupOrSoloName": ["Jon Wolfe"],
+                "publishedAt": "2013-05-25T20:00:00-0800",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2013-08-27", //ISO 8601
+                        "eventDateTime": "2013-08-27T20:00:00-0800", //ISO 8601
+                        "city" : "Houston",
+                        "venue": "Houston Concert Hall"
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 71.99,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "maximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT1H30M", //ISO 8601
+                    }
+            },
+            {
+                "concertName": "Live Concert At Austin",
+                "uri" : "https://www.JonWolfeOnAustin.com",
+                "groupOrSoloName": ["Jon Wolfe"],
+                "publishedAt": "2016-05-25T20:00:00-0800",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2016-08-27", //ISO 8601
+                        "eventDateTime": "2016-08-27T20:00:00-0800", //ISO 8601
+                        "city" : "Austin",
+                        "venue": "Austin Concert Hall",
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 71.99,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "maximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT1H30M", //ISO 8601
+                    }
+            }
+        ]
+        
+## Genre [/concerts/genre/{genre}]
+
++ Parameters
+    + genre (string) - genre of the concerts in the form of a string
+    
+### Get all concerts in this genre [GET]
+
++ Response 200 (application/json)
+
+        [   
+            {
+                "concertName": "Live Concert At Houston",
+                "uri" : "https://www.JonWolfeOnHouston.com",
+                "groupOrSoloName": ["Jon Wolfe"],
+                "publishedAt": "2013-05-25T20:00:00-0800",
+                "genre": "Country",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2013-08-27", //ISO 8601
+                        "eventDateTime": "2013-08-27T20:00:00-0800", //ISO 8601
+                        "city" : "Houston",
+                        "venue": "Houston Concert Hall",
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 71.99,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "maximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT1H30M", //ISO 8601
+                    }
+            },
+            {
+                "concertName": "Live Concert At Austin",
+                "uri" : "https://www.JonWolfeOnAustin.com",
+                "groupOrSoloName": ["Jon Wolfe"],
+                "publishedAt": "2016-05-25T20:00:00-0800",
+                "genre": "Country",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2013-08-27", //ISO 8601
+                        "eventDateTime": "2013-08-27T20:00:00-0800", //ISO 8601
+                        "city" : "Austin",
+                        "venue": "Austin Concert Hall",
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 71.99,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "maximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT1H30M", //ISO 8601
+                    }
+            }
+        ]
+        
+## City [/concerts/city/{city}]
+
++ Parameters
+    + city (string) - name of the city in the form of a string
+    
+### Get all concerts in the city[GET]
+
++ Response 200 (application/json)
+
+        [   
+            {
+                "concertName": "Live Concert At Houston",
+                "uri" : "https://www.JonWolfeOnHouston.com",
+                "groupOrSoloName": ["Jon Wolfe"],
+                "publishedAt": "2013-05-25T20:00:00-0800",
+                "genre": "Country",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2013-08-27", //ISO 8601
+                        "eventDateTime": "2013-08-27T20:00:00-0800", //ISO 8601
+                        "city" : "Houston",
+                        "venue": "Houston Concert Hall",
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 71.99,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "maximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT1H30M", //ISO 8601
+                    }
+            },
+            {
+                "concertName": "EC At Houston",
+                "uri" : "https://www.ECOnHouston.com",
+                "groupOrSoloName": ["Eric Clapton"],
+                "publishedAt": "2016-05-25T20:00:00-0800",
+                "genre": "Blues",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2013-08-27", //ISO 8601
+                        "eventDateTime": "2013-08-27T20:00:00-0800", //ISO 8601
+                        "city" : "Houston",
+                        "venue": "Houston City Hall",
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 85.00,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "maximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT2H30M", //ISO 8601
+                    }
+            }
+        ]
+        
+## Venue [/concerts/venue/{venue}]
+
++ Parameters
+    + venue (string) - name of the venue in the form of a string
+    
+### Get all concerts in the venue [GET]
+
++ Response 200 (application/json)
+
+        [   
+            {
+                "concertName": "Live Concert At Houston",
+                "uri" : "https://www.JonWolfeOnHouston.com",
+                "groupOrSoloName": ["Jon Wolfe"],
+                "publishedAt": "2013-05-25T20:00:00-0800",
+                "genre": "Country",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2013-08-27", //ISO 8601
+                        "eventDateTime": "2013-08-27T20:00:00-0800", //ISO 8601
+                        "city" : "Houston",
+                        "venue": "Houston Concert Hall",
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 71.99,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "maximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT1H30M", //ISO 8601
+                    }
+            },
+            {
+                "concertName": "EC At Austin",
+                "groupOrSoloName": ["Eric Clapton"],
+                "publishedAt": "2016-05-25T20:00:00-0800",
+                "genre": "Blues",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2016-08-27", //ISO 8601
+                        "eventDateTime": "2016-08-27T20:00:00-0800", //ISO 8601
+                        "city" : "Houston",
+                        "venue": "Houston Concert Hall",
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 85.00,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "maximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT2H30M", //ISO 8601
+                    }
+            }
+        ]
+        
+## Date [/concerts/date/{date}]
+
++ Parameters
+    + date (string) - name of the venue in the form of a string YYYY-MM-DD format
+    
+### Get all concerts on the date [GET]
+
++ Response 200 (application/json)
+
+        [   
+            {
+                "concertName": "Live Concert At Houston",
+                "uri" : "https://www.JonWolfeOnHouston.com",
+                "groupOrSoloName": ["Jon Wolfe"],
+                "publishedAt": "2013-05-25T20:00:00-0800",
+                "genre": "Country"
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2013-08-27", //ISO 8601
+                        "eventDateTime": "2013-08-27T20:00:00-0800", //ISO 8601
+                        "city" : "Houston",
+                        "venue": "Houston Concert Hall"
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 71.99,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "maximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT1H30M", //ISO 8601
+                    }
+            },
+            {
+                "concertName": "Live Concert At Dallas",
+                "uri" : "https://www.JonWolfeOnDallas.com",
+                "groupOrSoloName": ["Cream"],
+                "publishedAt": "2013-05-25T20:00:00-0800",
+                "genre": "Blues",
+                "eventDetails" : 
+                    {
+                        "eventTime":"20:00:00", //ISO 8601
+                        "eventDate":"2013-08-27", //ISO 8601
+                        "eventDateTime": "2013-08-27T20:00:00-0800", //ISO 8601
+                        "city" : "Dallas",
+                        "venue": "Dallas Concert Hall"
+                        "participationDetails" : 
+                            {
+                                "limitedParticipation" : true,
+                                "paidParticipation" : true,
+                                "priceDetails" : 
+                                    {
+                                        "ticketPrice" : 71.99,
+                                        "currency": "USD" //ISO 4217
+                                    },
+                                    
+                                "ticketsRemained" : 0,
+                                "maximumOccupancy" : 7000 
+                             },
+                             
+                        "duration" : "PT1H30M", //ISO 8601
+                    }
+            },
+        ]
